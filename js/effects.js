@@ -40,61 +40,61 @@ const EFFECT_SCALES = {
       cooldownDividerBaseValue: 0.0005,  //cost scaling 5
       maxCardsPerPokeBaseValue: 0.1,
       minCardsPerPokeBaseValue: 0.05,
-      oddsDividerCap: 2
+      oddsDividerCap: 4
     },
     basic: { 
       cooldownDividerBaseValue: 0.001,  //cost scaling 5
       maxCardsPerPokeBaseValue: 0.2,
       minCardsPerPokeBaseValue: 0.1,
-      oddsDividerCap: 2.5
+      oddsDividerCap: 5
     },
     decent: { 
       cooldownDividerBaseValue: 0.002, //cost scaling 4.5
       maxCardsPerPokeBaseValue: 0.5,
       minCardsPerPokeBaseValue: 0.25,
-      oddsDividerCap: 3
+      oddsDividerCap: 6
     },
     fine: { 
       cooldownDividerBaseValue: 0.003,  //cost scaling 4.5
       maxCardsPerPokeBaseValue: 1,
       minCardsPerPokeBaseValue: 0.5,
-      oddsDividerCap: 4
+      oddsDividerCap: 8
     },
     rare: { 
       cooldownDividerBaseValue: 0.004,  //cost scaling 4
       maxCardsPerPokeBaseValue: 2,
       minCardsPerPokeBaseValue: 1,
-      oddsDividerCap: 5
+      oddsDividerCap: 10
     },
     epic: { 
       cooldownDividerBaseValue: 0.005,  //cost scaling 4
       maxCardsPerPokeBaseValue: 5,
       minCardsPerPokeBaseValue: 2.5,
-      oddsDividerCap: 6
+      oddsDividerCap: 12
     },
     legend: { 
       cooldownDividerBaseValue: 0.006, //cost scaling 3.5
       maxCardsPerPokeBaseValue: 10,
       minCardsPerPokeBaseValue: 5,
-      oddsDividerCap: 7
+      oddsDividerCap: 14
     },
     mythic: { 
       cooldownDividerBaseValue: 0.007, //cost scaling 3.5
       maxCardsPerPokeBaseValue: 20,
       minCardsPerPokeBaseValue: 10,
-      oddsDividerCap: 8
+      oddsDividerCap: 16
     },
     exotic: { 
       cooldownDividerBaseValue: 0.008, //cost scaling 3
       maxCardsPerPokeBaseValue: 50,
       minCardsPerPokeBaseValue: 25,
-      oddsDividerCap: 9
+      oddsDividerCap: 18
     },
     divine: { 
       cooldownDividerBaseValue: 0.01, //cost scaling 3
       maxCardsPerPokeBaseValue: 100,
       minCardsPerPokeBaseValue: 50,
-      oddsDividerCap: 10
+      oddsDividerCap: 20
     }
   };
 
