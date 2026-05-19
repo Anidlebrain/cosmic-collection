@@ -25,6 +25,13 @@ let countdownEl;
 
 let loadFinished = false;
 
+function playRevealEffect(inner, effect) {
+  if (!effect) return;
+
+  inner.classList.add(effect);
+  inner.addEventListener('animationend', () => inner.classList.remove(effect), { once: true });
+}
+
 // Add these at the top with other global variables
 let merchantInterval;
 let currencyInterval;
@@ -1066,23 +1073,7 @@ function performPoke() {
         if (!inner.classList.contains('revealed')) {
           inner.classList.add('revealed');
           revealedCount++;
-
-          const onFlipEnd = e => {
-            if (e.propertyName === 'transform') {
-              if (c.locked) {
-                inner.classList.add('locked');
-                inner.addEventListener('animationend', () => inner.classList.remove('locked'), { once: true });
-              } else if (wasNew) {
-                inner.classList.add('spin');
-                inner.addEventListener('animationend', () => inner.classList.remove('spin'), { once: true });
-              } else if (newTier > oldTier) {
-                inner.classList.add('shake');
-                inner.addEventListener('animationend', () => inner.classList.remove('shake'), { once: true });
-              }
-            }
-            inner.removeEventListener('transitionend', onFlipEnd);
-          };
-          inner.addEventListener('transitionend', onFlipEnd);
+          playRevealEffect(inner, c.locked ? 'locked' : wasNew ? 'spin' : newTier > oldTier ? 'shake' : null);
 
           if (revealedCount === currentPackCount - skippedCards) {
             state.flipsDone = true;
@@ -1099,23 +1090,7 @@ function performPoke() {
 
           // Increment interceptor value
           window.incrementInterceptor();
-
-          const onFlipEnd = e => {
-            if (e.propertyName === 'transform') {
-              if (c.locked) {
-                inner.classList.add('locked');
-                inner.addEventListener('animationend', () => inner.classList.remove('locked'), { once: true });
-              } else if (wasNew) {
-                inner.classList.add('spin');
-                inner.addEventListener('animationend', () => inner.classList.remove('spin'), { once: true });
-              } else if (newTier > oldTier) {
-                inner.classList.add('shake');
-                inner.addEventListener('animationend', () => inner.classList.remove('shake'), { once: true });
-              }
-            }
-            inner.removeEventListener('transitionend', onFlipEnd);
-          };
-          inner.addEventListener('transitionend', onFlipEnd);
+          playRevealEffect(inner, c.locked ? 'locked' : wasNew ? 'spin' : newTier > oldTier ? 'shake' : null);
 
           if (revealedCount === currentPackCount - skippedCards) {
             state.flipsDone = true;
@@ -1177,22 +1152,9 @@ document.addEventListener('touchmove', (e) => {
 
       // Increment interceptor value
       window.incrementInterceptor();
-
-      const onFlipEnd = e => {
-        if (e.propertyName === 'transform') {
-          const cid = inner.dataset.id;
-          const c = cardMap[cid];
-          if (c.isNew) {
-            inner.classList.add('spin');
-            inner.addEventListener('animationend', () => inner.classList.remove('spin'), { once: true });
-          } else if (c.tier > c.lastTier) {
-            inner.classList.add('shake');
-            inner.addEventListener('animationend', () => inner.classList.remove('shake'), { once: true });
-          }
-        }
-        inner.removeEventListener('transitionend', onFlipEnd);
-      };
-      inner.addEventListener('transitionend', onFlipEnd);
+      const cid = inner.dataset.id;
+      const c = cardMap[cid];
+      playRevealEffect(inner, c.isNew ? 'spin' : c.tier > c.lastTier ? 'shake' : null);
 
       if (revealedCount === currentPackCount - skippedCards) {
         state.flipsDone = true;
