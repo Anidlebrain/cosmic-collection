@@ -32,6 +32,17 @@ function playRevealEffect(inner, effect) {
   inner.addEventListener('animationend', () => inner.classList.remove(effect), { once: true });
 }
 
+function shouldAutoPokeBlackHole() {
+  return skillMap[12401]?.purchased || (skillMap[12203]?.purchased && state.interceptorActive);
+}
+
+function maybeAutoPokeBlackHole() {
+  if (!shouldAutoPokeBlackHole()) return;
+  if (holeBtn.disabled || state.remainingCooldown > 0 || !state.flipsDone) return;
+
+  performPoke();
+}
+
 // Add these at the top with other global variables
 let merchantInterval;
 let currencyInterval;
@@ -1189,9 +1200,7 @@ function tryEnableHole() {
       easing:  'easeOutBack'
     });
 
-    if (skillMap[12203].purchased && state.interceptorActive) {
-      performPoke();
-    }
+    maybeAutoPokeBlackHole();
   }
 }
 
@@ -4183,6 +4192,7 @@ document.addEventListener('DOMContentLoaded', async ()=>{
   } else {
     holeBtn.disabled = false;
     holeBtn.classList.remove('disabled');
+    maybeAutoPokeBlackHole();
   }
 
   // Initialize Time Crunch

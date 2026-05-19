@@ -492,6 +492,8 @@ var cnItems = {
     "Are those exotic eyes I see? Magnificent.": "我看到的是异域风情的眼睛吗？宏伟的。",
     "Are you sure you’re not secretly a divine avatar?": "你确定你不是神的化身吗？",
     "Auto-User Absorber": "自动使用者吸收器",
+    "Automatically poke the black hole when its cooldown is finished.": "黑洞冷却结束后自动点击抽卡。",
+    "Black Hole Autopoker": "黑洞自动点击器",
     "Beetles make up about 40% of all known insect species.": "甲虫约占所有已知昆虫种类的40%。",
     "Behold, the one who once pulled divine back-to-back!": "瞧，那个曾经把神拉到背靠背上的人！",
     "Black Hole pokes and Merchants can now give cards from Aviary realm.": "黑洞点击和商人现在可以从鸟舍王国赠送卡牌了。",

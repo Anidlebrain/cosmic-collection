@@ -1366,6 +1366,13 @@ window.skills = [
       purchased: false
     },
     {
+      id: 12401,
+      name: "Black Hole Autopoker",
+      description: "Automatically poke the black hole when its cooldown is finished.",
+      cost: { realmId: 9, currencyId: "spirit", amount: 1e9 },
+      purchased: false
+    },
+    {
       id: 13001,
       name: "Anomaly",
       description: "Increases min cards per poke by 4.04.",
@@ -3461,7 +3468,7 @@ function applySkill(id, skipCost = false) {
     // 2) mark purchased
     s.purchased = true;
 
-    if ((loadFinished || onLoadSingleCheck) && Object.values(skillMap).filter(s => s.purchased).length === 490) {
+    if ((loadFinished || onLoadSingleCheck) && Object.values(skillMap).filter(s => s.purchased).length === Object.values(skillMap).length) {
       unlockAchievement('endgameChecklist2');
       onLoadSingleCheck = false;
     }
@@ -4095,6 +4102,9 @@ function applySkill(id, skipCost = false) {
         break;
       case 12302: // Collector Upgrade
         state.timeCrunchMaxChargeTime += 150; // +2.5 minutes
+        break;
+      case 12401: // Black Hole Autopoker
+        if (loadFinished) tryEnableHole();
         break;
       case 13001: // Anomaly
         state.effects.minCardsPerPoke += 4.04;
