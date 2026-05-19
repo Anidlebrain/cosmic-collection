@@ -1,4 +1,21 @@
 // --- SKILLS DATA ---
+window.COOLDOWN_DIVIDER_EQUATION_SKILL_IDS = [
+  30009, 30101, 30102, 30103, 30104, 30105,
+  30106, 30107, 30108, 30109, 30110, 30111
+];
+
+function getCooldownDividerEquationBoostLevel() {
+  return window.COOLDOWN_DIVIDER_EQUATION_SKILL_IDS.reduce(
+    (total, id) => total + (skillMap[id]?.purchased ? 1 : 0),
+    0
+  );
+}
+
+function getCooldownDividerEquationDivisor() {
+  const level = getCooldownDividerEquationBoostLevel();
+  return Math.max(0.5, 3 - level * (2.5 / 12));
+}
+
 window.skills = [
     {
       id: 1001,
@@ -3369,8 +3386,85 @@ window.skills = [
     },
     {
       id: 30009,
-      name: "Cooldown Divider Equation Boost",
-      description: "Increase Tier contribution for Cooldown Divider of all cards by 2x. (From T*(T+1)/2 to T*(T+1))",
+      name: "Cooldown Divider Equation Boost I",
+      description: "Increase Tier contribution for Cooldown Divider of all cards.",
+      cost: { realmId: 1, currencyId: "rune", amount: 2e27 },
+      purchased: false
+    },
+    {
+      id: 30101,
+      name: "Cooldown Divider Equation Boost II",
+      description: "Increase Tier contribution for Cooldown Divider of all cards.",
+      cost: { realmId: 2, currencyId: "pearl", amount: 2e27 },
+      purchased: false
+    },
+    {
+      id: 30102,
+      name: "Cooldown Divider Equation Boost III",
+      description: "Increase Tier contribution for Cooldown Divider of all cards.",
+      cost: { realmId: 3, currencyId: "royal_jelly", amount: 2e27 },
+      purchased: false
+    },
+    {
+      id: 30103,
+      name: "Cooldown Divider Equation Boost IV",
+      description: "Increase Tier contribution for Cooldown Divider of all cards.",
+      cost: { realmId: 4, currencyId: "feather", amount: 2e27 },
+      purchased: false
+    },
+    {
+      id: 30104,
+      name: "Cooldown Divider Equation Boost V",
+      description: "Increase Tier contribution for Cooldown Divider of all cards.",
+      cost: { realmId: 5, currencyId: "crystal", amount: 2e27 },
+      purchased: false
+    },
+    {
+      id: 30105,
+      name: "Cooldown Divider Equation Boost VI",
+      description: "Increase Tier contribution for Cooldown Divider of all cards.",
+      cost: { realmId: 6, currencyId: "cosmic_ray", amount: 2e27 },
+      purchased: false
+    },
+    {
+      id: 30106,
+      name: "Cooldown Divider Equation Boost VII",
+      description: "Increase Tier contribution for Cooldown Divider of all cards.",
+      cost: { realmId: 7, currencyId: "tooth", amount: 2e27 },
+      purchased: false
+    },
+    {
+      id: 30107,
+      name: "Cooldown Divider Equation Boost VIII",
+      description: "Increase Tier contribution for Cooldown Divider of all cards.",
+      cost: { realmId: 8, currencyId: "coin", amount: 2e27 },
+      purchased: false
+    },
+    {
+      id: 30108,
+      name: "Cooldown Divider Equation Boost IX",
+      description: "Increase Tier contribution for Cooldown Divider of all cards.",
+      cost: { realmId: 9, currencyId: "spirit", amount: 2e27 },
+      purchased: false
+    },
+    {
+      id: 30109,
+      name: "Cooldown Divider Equation Boost X",
+      description: "Increase Tier contribution for Cooldown Divider of all cards.",
+      cost: { realmId: 10, currencyId: "spirit", amount: 2e27 },
+      purchased: false
+    },
+    {
+      id: 30110,
+      name: "Cooldown Divider Equation Boost XI",
+      description: "Increase Tier contribution for Cooldown Divider of all cards.",
+      cost: { realmId: 11, currencyId: "zeal", amount: 2e27 },
+      purchased: false
+    },
+    {
+      id: 30111,
+      name: "Cooldown Divider Equation Boost XII",
+      description: "Increase Tier contribution for Cooldown Divider of all cards.",
       cost: { realmId: 12, currencyId: "rune", amount: 2e27 },
       purchased: false
     },
@@ -4723,6 +4817,17 @@ function applySkill(id, skipCost = false) {
       case 30008:
         break;
       case 30009: // Increase Tier contribution for Cooldown Divider
+      case 30101:
+      case 30102:
+      case 30103:
+      case 30104:
+      case 30105:
+      case 30106:
+      case 30107:
+      case 30108:
+      case 30109:
+      case 30110:
+      case 30111:
       case 30010: // Increase Tier contribution exponent Base for Min/Max Cards per Poke
       case 30011: // Increase Tier contribution exponent Base for Currency per Poke and per Second
         // Need to recalculate all card effects since the formula changed

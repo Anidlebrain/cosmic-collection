@@ -2313,7 +2313,7 @@ function openModal(cardId) {
         valueHtml = `+${formatNumber(total)}`;
       } else if (def.type === "cooldownDivider") {
         const baseValue = EFFECTS_RARITY_VALUES[c.rarity]?.cooldownDividerBaseValue || 0;
-        const tierContribution = (c.tier * (c.tier + 1)) / (skillMap[30009].purchased ? 1 : 2);
+        const tierContribution = (c.tier * (c.tier + 1)) / getCooldownDividerEquationDivisor();
         total = baseValue * c.level * tierContribution;
         breakdown = `(base: ${formatNumber(baseValue)} × ${formatNumber(c.level)} lvl × ${formatNumber(tierContribution)} tier)`;
         valueHtml = `+${formatNumber(total)}`;

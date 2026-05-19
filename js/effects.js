@@ -229,7 +229,7 @@ function computeCardEffects(c) {
   
             case "cooldownDivider": {
                 const baseValue = EFFECTS_RARITY_VALUES[c.rarity]?.cooldownDividerBaseValue || 0;
-                const tierContribution = (c.tier * (c.tier + 1)) / (skillMap[30009].purchased ? 1 : 2);
+                const tierContribution = (c.tier * (c.tier + 1)) / getCooldownDividerEquationDivisor();
                 const total = baseValue * c.level * tierContribution;
                 effs.cooldownDivider = (effs.cooldownDivider || 0) + total;
                 break;
