@@ -36,6 +36,10 @@ function shouldAutoPokeBlackHole() {
   return skillMap[12401]?.purchased || (skillMap[12203]?.purchased && state.interceptorActive);
 }
 
+function shouldAutoRevealCards() {
+  return state.interceptorActive || skillMap[12402]?.purchased;
+}
+
 function maybeAutoPokeBlackHole() {
   if (!shouldAutoPokeBlackHole()) return;
   if (holeBtn.disabled || state.remainingCooldown > 0 || !state.flipsDone) return;
@@ -1077,8 +1081,8 @@ function performPoke() {
     outer.append(inner);
     drawArea.append(outer);
 
-    // Check if interceptor is active
-    if (state.interceptorActive) {
+    // Check if cards should be revealed automatically
+    if (shouldAutoRevealCards()) {
       // Auto-flip after a short delay
       setTimeout(() => {
         if (!inner.classList.contains('revealed')) {

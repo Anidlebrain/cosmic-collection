@@ -1373,6 +1373,13 @@ window.skills = [
       purchased: false
     },
     {
+      id: 12402,
+      name: "Card Auto-Revealer",
+      description: "Cards are automatically revealed after each black hole poke.",
+      cost: { realmId: 4, currencyId: "egg", amount: 2e6 },
+      purchased: false
+    },
+    {
       id: 13001,
       name: "Anomaly",
       description: "Increases min cards per poke by 4.04.",
@@ -4105,6 +4112,8 @@ function applySkill(id, skipCost = false) {
         break;
       case 12401: // Black Hole Autopoker
         if (loadFinished) tryEnableHole();
+        break;
+      case 12402: // Card Auto-Revealer
         break;
       case 13001: // Anomaly
         state.effects.minCardsPerPoke += 4.04;
