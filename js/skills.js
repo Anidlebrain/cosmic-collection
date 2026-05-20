@@ -157,8 +157,7 @@ function initializeSortedSkills() {
 
   // Filter unlocked/unpurchased skills
   const unlockedUnpurchasedSkills = skills.filter(s => {
-    const realmUnlocked = realmMap[s.cost.realmId]?.unlocked;
-    return realmUnlocked && !s.purchased;
+    return isSkillUnlocked(s) && !s.purchased;
   });
 
   // Group by currency
@@ -221,11 +220,10 @@ function renderSkillsTab() {
     const skillsList = sortedSkillsByCurrency[currencyId] || [];
 
     skillsList.forEach(s => {
-      const realmUnlocked = realmMap[s.cost.realmId]?.unlocked;
       const owned = s.purchased;
       const curAmt = state.currencies[s.cost.currencyId] || new Decimal(0);
       const affordable = curAmt.greaterThanOrEqualTo(s.cost.amount);
-      const locked = !realmUnlocked;
+      const locked = !isSkillUnlocked(s);
 
       // Apply filtering logic for unpurchased/unlocked skills
       if (skillFilterState.purchased === 'purchased' && !owned) return;
@@ -301,8 +299,7 @@ function renderSkillsTab() {
   const skillsToCheck = skillFilterState.purchased === 'purchased' ? purchasedSkills : window.skills;
   skillsToCheck.forEach(s => {
     const owned = s.purchased;
-    const realmUnlocked = realmMap[s.cost.realmId]?.unlocked;
-    const locked = !realmUnlocked;
+    const locked = !isSkillUnlocked(s);
     const curAmt = state.currencies[s.cost.currencyId] || new Decimal(0);
     const affordable = curAmt.greaterThanOrEqualTo(s.cost.amount);
 
@@ -394,27 +391,11 @@ function renderSkillsTab() {
 
 // Optimized checkAffordableSkills to check only first skill in each sorted list
 function checkAffordableSkills() {
-  let hasAffordable = false;
-
-  for (const currencyId in sortedSkillsByCurrency) {
-    const skillsList = sortedSkillsByCurrency[currencyId];
-    if (!skillsList || skillsList.length === 0) continue;
-
-    for (const s of skillsList) {
-      if (s.purchased) continue;
-      const realmUnlocked = realmMap[s.cost.realmId].unlocked;
-      if (!realmUnlocked) continue;
-
-      const curAmt = state.currencies[s.cost.currencyId] || new Decimal(0);
-      if (curAmt.greaterThanOrEqualTo(s.cost.amount)) {
-        hasAffordable = true;
-        break;
-      }
-      // Since list is sorted by cost ascending, if first not affordable, no need to check further
-      break;
-    }
-    if (hasAffordable) break;
-  }
+  const hasAffordable = skills.some(s => {
+    if (s.purchased || !isSkillUnlocked(s)) return false;
+    const curAmt = state.currencies[s.cost.currencyId] || new Decimal(0);
+    return curAmt.greaterThanOrEqualTo(s.cost.amount);
+  });
 
   const skillsTab = document.getElementById('tab-btn-skills');
   if (!skillsTab) {
