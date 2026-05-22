@@ -1402,15 +1402,17 @@ window.skills = [
     {
       id: 12401,
       name: "Black Hole Autopoker",
-      description: "Automatically poke the black hole when its cooldown is finished.",
-      cost: { realmId: 9, currencyId: "spirit", amount: 1e9 },
+      description: "Interceptor auto-poking no longer consumes charge.",
+      cost: { realmId: 11, currencyId: "zeal", amount: 5e13 },
+      requiresSkills: [12203],
       purchased: false
     },
     {
       id: 12402,
       name: "Card Auto-Revealer",
-      description: "Cards are automatically revealed after each black hole poke.",
-      cost: { realmId: 4, currencyId: "egg", amount: 2e6 },
+      description: "Interceptor auto-revealing cards no longer consumes charge.",
+      cost: { realmId: 8, currencyId: "coin", amount: 1e11 },
+      requiresSkills: [12202],
       purchased: false
     },
     {
